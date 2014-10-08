@@ -1,0 +1,42 @@
+{
+  "name": "grunt-resxtojson",
+  "description": "Convert resx files to JSON.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ericb81/grunt-resxtojson",
+  "author": {
+    "name": "Eric Beragg",
+    "email": "eric.beragg@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ericb81/grunt-resxtojson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericb81/grunt-resxtojson/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ericb81/grunt-resxtojson/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "xmldoc": "^0.1.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
