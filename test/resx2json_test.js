@@ -28,10 +28,28 @@ exports.resxtojson = {
   },
 
   transform: function(test) {
-    test.expect(1);
+    test.expect(2);
 
-    var actual = grunt.file.read('tmp/Resources.js');
-    var expected = grunt.file.read('test/expected/Resources.js');
+    var actual = grunt.file.read('tmp/transform/Resources.js');
+    var expected = grunt.file.read('test/expected/transform/Resources.js');
+    test.equal(actual, expected);
+
+    actual = grunt.file.read('tmp/transform/Resources.nl-NL.js');
+    expected = grunt.file.read('test/expected/transform/Resources.nl-NL.js');
+    test.equal(actual, expected);
+
+    test.done();
+  },
+
+  transformMatch: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.read('tmp/transformMatch/Resources.js');
+    var expected = grunt.file.read('test/expected/transformMatch/Resources.js');
+    test.equal(actual, expected);
+
+    actual = grunt.file.read('tmp/transformMatch/Resources.nl-NL.js');
+    expected = grunt.file.read('test/expected/transformMatch/Resources.nl-NL.js');
     test.equal(actual, expected);
 
     test.done();

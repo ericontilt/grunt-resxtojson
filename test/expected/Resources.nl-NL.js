@@ -1,1 +1,0 @@
-{"WindowTitle_Contacts":"Contacten"}

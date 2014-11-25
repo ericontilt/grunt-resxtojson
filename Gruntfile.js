@@ -32,7 +32,15 @@ module.exports = function(grunt) {
     resxtojson: {
       transform: {
         src: 'test/fixtures/*.resx',
-        dest: 'tmp/'
+        dest: 'tmp/transform/'
+      },
+
+      transformMatch: {
+        src: 'test/fixtures/*.resx',
+        dest: 'tmp/transformMatch/',
+        options: {
+          matchPattern: /\bPageTitle_.*\b/
+        }
       }
     },
 

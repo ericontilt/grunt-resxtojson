@@ -120,4 +120,7 @@
   <data name="WindowTitle_Contacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
+  <data name="PageTitle_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
 </root>
