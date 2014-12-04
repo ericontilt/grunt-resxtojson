@@ -65,4 +65,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+0.3.1 - Documentation update
 0.3.0 - First version with desired behavior.
