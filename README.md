@@ -41,7 +41,7 @@ grunt.initConfig({
 grunt.initConfig({
   resxtojson: {
     transform: {
-      src: 'test/fixtures/*.resx',
+      src: 'test/fixtures/Resources.resx',
       dest: 'tmp/',
       options: {
         matchPattern: /\bPageTitle_.*\b/
@@ -51,10 +51,18 @@ grunt.initConfig({
 });
 ```
 
+src
+
+Please note that the source file should point to the main resx file. This language resources from this file will be used as a fallback, when a specific translation does not exist.
+
+matchPattern
+
+A regular expression which is used to match against resource keys.
+
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
-_(Nothing yet)_
+0.3.0 - First version with desired behavior.
