@@ -31,16 +31,23 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     resxtojson: {
       transform: {
-        src: 'test/fixtures/*.resx',
+        src: 'test/fixtures/Resources.resx',
         dest: 'tmp/transform/'
       },
 
       transformMatch: {
-        src: 'test/fixtures/*.resx',
+        src: 'test/fixtures/Resources.resx',
         dest: 'tmp/transformMatch/',
         options: {
           matchPattern: /\bPageTitle_.*\b/
         }
+      }
+    },
+
+    watch: {
+      tasks: {
+        files: ['./tasks/resxtojson.js', './test/resxtojson_test.js'],
+        tasks: ['default']
       }
     },
 
@@ -58,6 +65,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.

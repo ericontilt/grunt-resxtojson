@@ -1,1 +1,1 @@
-{"WindowTitle_Contacts":"Contacten","PageTitle_Address":"Adres"}
+{"WindowTitle_Contacts":"Contacten","PageTitle_Address":"Address"}
