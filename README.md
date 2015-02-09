@@ -65,5 +65,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+0.3.2 - FIXED Sometimes XML parsing would fail for some elements
 0.3.1 - Documentation update
 0.3.0 - First version with desired behavior.

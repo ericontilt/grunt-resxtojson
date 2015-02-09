@@ -2,7 +2,7 @@
  * grunt-resxtojson
  * https://github.com/ericb81/grunt-resxtojson
  *
- * Copyright (c) 2014 Eric Beragg
+ * Copyright (c) 2015 Eric Beragg
  * Licensed under the MIT license.
  */
 

@@ -51,10 +51,10 @@ function _extend(keysFunc) {
 
 module.exports = function(grunt) {
   var Info = grunt.log.writeln,
-      Warn = grunt.log.warn,
-      Err = grunt.log.err,
-      File = grunt.file,
-      extend = _extend(keysIn);
+  Warn = grunt.log.warn,
+  Err = grunt.log.err,
+  File = grunt.file,
+  extend = _extend(keysIn);
 
   grunt.registerMultiTask('resxtojson', 'Convert resx files to JSON.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
@@ -63,9 +63,9 @@ module.exports = function(grunt) {
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
       var sourcePath, 
-          sourceFileName,
-          fileContent,
-          fileName, baseTranslation, outFilePath;
+      sourceFileName,
+      fileContent,
+      fileName, baseTranslation, outFilePath;
 
       // Create the destination directory, if it doesn't exist
       if (!File.isDir(f.dest)) {
@@ -114,8 +114,8 @@ module.exports = function(grunt) {
   }
 
   function writeJSONOutput(path, contents) {
-      Info(sprintf('Created "%s"', path));
-      File.write(path, contents);
+    Info(sprintf('Created "%s"', path));
+    File.write(path, contents);
   }
 
   function resxtojson(contents, matchPattern) {
@@ -124,20 +124,20 @@ module.exports = function(grunt) {
     xDoc = new xmldoc.XmlDocument(contents);
     outputObj = {};
 
-    xDataChildren = xDoc.childrenNamed('data');
+    xDoc.eachChild(function(node){
+      if (node.name === 'data'){
+        currentKey = node.attr.name;
+        currentValue = node.children[0].val;
 
-    for (xNode in xDataChildren) {
-      currentKey = xDataChildren[xNode].attr.name;
-      currentValue = xDataChildren[xNode].children[0].val;
-
-      if (matchPattern) {
-        if (!matchPattern.test(currentKey)) {
-          continue;
+        if (matchPattern) {
+          if (!matchPattern.test(currentKey)) {
+            return;
+          }
         }
-      }
 
-      outputObj[currentKey] = currentValue;
-    }
+        outputObj[currentKey] = currentValue;
+      }
+    });
 
     return outputObj;
   }
