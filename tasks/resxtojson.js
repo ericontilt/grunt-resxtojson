@@ -134,6 +134,12 @@ module.exports = function(grunt) {
       if (node.name === 'data'){
         currentKey = node.attr.name;
 
+        if (matchPattern) {
+          if (!matchPattern.test(currentKey)) {
+            return;
+          }
+        }
+
         try
         {
           currentValue = node.children[0].val;
@@ -141,13 +147,6 @@ module.exports = function(grunt) {
         } catch (err) {
           throw currentKey;
         }
-
-        if (matchPattern) {
-          if (!matchPattern.test(currentKey)) {
-            return;
-          }
-        }
-
       }
     });
 
