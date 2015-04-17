@@ -6,15 +6,15 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+ 'use strict';
 
-var path = require('path');
-var xmldoc = require('xmldoc');
+ var path = require('path');
+ var xmldoc = require('xmldoc');
 
-function sprintf(format) {
+ function sprintf(format) {
   var i = 0, args = Array.prototype.slice.call(arguments, 1);
   return format.replace(/(%s)/g, function(){
-    return args[i];
+    return args[i++];
   });
 }
 
@@ -52,7 +52,7 @@ function _extend(keysFunc) {
 module.exports = function(grunt) {
   var Info = grunt.log.writeln,
   Warn = grunt.log.warn,
-  Err = grunt.log.err,
+  Err = grunt.log.error,
   File = grunt.file,
   extend = _extend(keysIn);
 
@@ -100,7 +100,12 @@ module.exports = function(grunt) {
         var jsonFromResx;
 
         fileContent = File.read(filePath);
-        jsonFromResx = extend({}, baseTranslation, resxtojson(fileContent, options.matchPattern));
+        try
+        {
+          jsonFromResx = extend({}, baseTranslation, resxtojson(fileContent, options.matchPattern));
+        } catch (key) {
+          throw new Error(sprintf('Error converting %s -> Value of %s cannot be parsed.', outFilePath, key));
+        }
 
         fileName = getFileNameFromPath(filePath);
         outFilePath = path.join(f.dest, fileName.replace('.resx', '.js'));
@@ -119,15 +124,23 @@ module.exports = function(grunt) {
   }
 
   function resxtojson(contents, matchPattern) {
-    var xDoc, xDataChildren, xNode, outputObj, currentKey, currentValue;
+    var xDoc, xDataChildren, xNode, outputObj;
 
     xDoc = new xmldoc.XmlDocument(contents);
     outputObj = {};
 
-    xDoc.eachChild(function(node){
+    xDoc.eachChild(function(node) {
+      var currentKey, currentValue;
       if (node.name === 'data'){
         currentKey = node.attr.name;
-        currentValue = node.children[0].val;
+
+        try
+        {
+          currentValue = node.children[0].val;
+          outputObj[currentKey] = currentValue;
+        } catch (err) {
+          throw currentKey;
+        }
 
         if (matchPattern) {
           if (!matchPattern.test(currentKey)) {
@@ -135,7 +148,6 @@ module.exports = function(grunt) {
           }
         }
 
-        outputObj[currentKey] = currentValue;
       }
     });
 

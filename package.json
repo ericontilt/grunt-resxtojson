@@ -1,7 +1,7 @@
 {
   "name": "grunt-resxtojson",
   "description": "Convert resx files to JSON.",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "homepage": "https://github.com/ericb81/grunt-resxtojson",
   "author": {
     "name": "Eric Beragg",
