@@ -62,54 +62,52 @@ module.exports = function(grunt) {
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
-      var sourcePath, 
-      sourceFileName,
+      var sourceFileName,
       fileContent,
       fileName, baseTranslation, outFilePath;
-
       // Create the destination directory, if it doesn't exist
       if (!File.isDir(f.dest)) {
         Info(sprintf('Destination directory created "%s"', f.dest));
         File.mkdir(f.dest);
       }
 
-      sourcePath = f.src[0];
-
-      if (!File.exists(sourcePath)) {
-        throw new Error(sprintf('Source file "%s" not found.', f.src));
-      }
-
-      fileContent = File.read(sourcePath);
-      baseTranslation = resxtojson(fileContent, options.matchPattern);
-      sourceFileName = getFileNameFromPath(sourcePath);
-      outFilePath = path.join(f.dest, sourceFileName.replace('.resx', '.js'));
-      writeJSONOutput(outFilePath, JSON.stringify(baseTranslation));
-
-      var sourceFiles = File.expand(
-        [sourcePath.replace('.resx', '.*.resx')]);
-
-      sourceFiles.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!File.exists(filepath)) {
-          Warn(sprintf('Source file "%s" not found.', filepath));
-          return false;
-        } else {
-          return true;
-        }
-      }).forEach(function(filePath) {
-        var jsonFromResx;
-
-        fileContent = File.read(filePath);
-        try
-        {
-          jsonFromResx = extend({}, baseTranslation, resxtojson(fileContent, options.matchPattern));
-        } catch (key) {
-          throw new Error(sprintf('Error converting %s -> Value of %s cannot be parsed.', outFilePath, key));
+      f.src.forEach(function(sourcePath){
+        if (!File.exists(sourcePath)) {
+          throw new Error(sprintf('Source file "%s" not found.', f.src));
         }
 
-        fileName = getFileNameFromPath(filePath);
-        outFilePath = path.join(f.dest, fileName.replace('.resx', '.js'));
-        writeJSONOutput(outFilePath, JSON.stringify(jsonFromResx));
+        fileContent = File.read(sourcePath);
+        baseTranslation = resxtojson(fileContent, options.matchPattern);
+        sourceFileName = getFileNameFromPath(sourcePath);
+        outFilePath = path.join(f.dest, sourceFileName.replace('.resx', '.js'));
+        writeJSONOutput(outFilePath, JSON.stringify(baseTranslation));
+
+        var sourceFiles = File.expand(
+          [sourcePath.replace('.resx', '.*.resx')]);
+
+        sourceFiles.filter(function(filepath) {
+          // Warn on and remove invalid source files (if nonull was set).
+          if (!File.exists(filepath)) {
+            Warn(sprintf('Source file "%s" not found.', filepath));
+            return false;
+          } else {
+            return true;
+          }
+        }).forEach(function(filePath) {
+          var jsonFromResx;
+
+          fileContent = File.read(filePath);
+          try
+          {
+            jsonFromResx = extend({}, baseTranslation, resxtojson(fileContent, options.matchPattern));
+          } catch (key) {
+            throw new Error(sprintf('Error converting %s -> Value of %s cannot be parsed.', outFilePath, key));
+          }
+
+          fileName = getFileNameFromPath(filePath);
+          outFilePath = path.join(f.dest, fileName.replace('.resx', '.js'));
+          writeJSONOutput(outFilePath, JSON.stringify(jsonFromResx));
+        });
       });
     });
   });
