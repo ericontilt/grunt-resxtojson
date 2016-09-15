@@ -3,7 +3,7 @@
 > Convert resx files to JSON files.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.5`
+This plugin requires Grunt `>=0.4.0`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -61,10 +61,11 @@ A regular expression which is used to match against resource keys.
 
 ## Contributing
 
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
-0.3.2 - FIXED Sometimes XML parsing would fail for some elements
-0.3.1 - Documentation update
-0.3.0 - First version with desired behavior.
+0.4.3 - Merged pull request regarding grunt peer dependency
+0.3.2 - Fixed occasional XML parse error
+0.3.1 - Update documentation
+0.3.0 - Released first version

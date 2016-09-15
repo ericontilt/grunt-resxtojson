@@ -2,7 +2,7 @@
  * grunt-resxtojson
  * https://github.com/ericb81/grunt-resxtojson
  *
- * Copyright (c) 2014 Eric Beragg
+ * Copyright (c) 2014-2016 Eric Beragg
  * Licensed under the MIT license.
  */
 
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
-      var sourcePath, 
+      var sourcePath,
       sourceFileName,
       fileContent,
       fileName, baseTranslation, outFilePath;
